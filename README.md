@@ -21,5 +21,12 @@ you can run on docker container with commands:<br><br>
 ### Admin user:
 **Username:** admin<br>
 **Password:** admin<br>
-(change it on user dashboard)<br><br><br>
+(change it on user dashboard)<br><br>
+
+### Home Page:
+you can edit home page in: Admin --> Main-Page
+
+
+
+<br><br>
 You can show my blog --> [Dev-Docs-Ops](https://yoas1.pythonanywhere.com)
