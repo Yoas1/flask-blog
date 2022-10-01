@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" img src="{{ url_for('static', filename='imgs/pcb.png') }}" />
+  </head>
+  {% extends 'base.html' %}
+  {% block content %}
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  <body>
+
+    {% if id == current_user.id or current_user.pet_name == "admin" %}
+
+          <h1>Update User</h1>
+            <br><br>
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+            <form action="/update-user-admin/{{ name_to_update.id }}" method="POST">
+
+                {{ form.hidden_tag() }}
+                
+                {{ form.name.label(class="from_label") }}
+                {{ form.name(class="form-control form-control-lg", value=name_to_update.name) }}<br>
+
+                {{ form.username.label(class="from_label") }}
+                {{ form.username(class="form-control form-control-lg", value=name_to_update.username) }}<br>
+
+                {{ form.email.label(class="from_label") }}
+                {{ form.email(class="form-control form-control-lg", value=name_to_update.email) }}<br>
+
+                {{ form.pet_name.label(class="from_label") }}
+                {{ form.pet_name(class="form-control form-control-lg", value=name_to_update.pet_name) }}<br>
+
+                <p class="from_label">Change password
+                {{ form.password_hash(class="form-control form-control-lg", value=name_to_update.password_hash) }}<br>
+
+                {{ form.submit(class="btn btn-primary mb-3") }}
+                <a href="{{ url_for('delete_user', id=id) }}" class="btn btn-danger mb-3">Delete</a>
+
+            </form>
+        </div>
+    
+    {% else %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+      Sorry! You cant edit this user!
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <h1>Access Denied!</h1>
+    {% endif %}
+  </body>
+  {% endblock %}
+</html>

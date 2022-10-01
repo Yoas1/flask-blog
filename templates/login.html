@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  {% extends 'base.html' %}
+  {% block content %}
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  <body>
+
+          <h1>Login</h1>
+            <br><br>
+            <div class="shadow-lg p-3 mb-5 rounded">
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+                
+                {{ form.username.label(class="from_label") }}
+                {{ form.username(class="form-control form-control-lg") }}<br>
+
+                {{ form.password.label(class="from_label") }}
+                {{ form.password(class="form-control form-control-lg") }}<br>
+
+                {{ form.submit(class="btn btn-primary mb-3") }}
+
+            </form>
+        </div>
+      </body>
+      {% endblock %}
+    </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <script>
+    function toggle_display(){
+      el = document.querySelector('.content_section');
+      el.style.visibility = 'hidden'
+    }
+      </script>
+  {% extends 'base.html' %}
+  {% block content %}
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+ <body onload="toggle_display()">
+  {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+
+    <h1>Edit main post</h1>
+    <br><br>
+    <div class="shadow-lg p-3 mb-5 rounded">
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+        
+        {{ form.title.label(class="from_label", dir="ltr") }}
+        {{ form.title(class="form-control form-control-lg") }}<br>
+
+        <div class="content_section">
+        {{ form.slug.label(class="from_label") }}
+        {{ form.slug(class="form-select form-control-lg") }}<br>
+        </div>
+
+        {{ form.content(class="form-control form-control-lg", rows="8") }}<br>
+
+        {{ form.submit(class="btn btn-primary mb-3") }}
+
+    </form>
+
+    {{ ckeditor.config(name='content') }}
+  </div>
+</body>
+{% endblock %}
+</html>

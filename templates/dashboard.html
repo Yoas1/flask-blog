@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  {% extends 'base.html' %}
+  {% block content %}
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  <body>
+    <h1>User Dashboard</h1>
+<div class="m-4">
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" id="myTab">
+                <li class="nav-item">
+                    <a href="#profile" class="nav-link active" data-bs-toggle="tab">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#edit-user" class="nav-link" data-bs-toggle="tab">Edit-user</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="profile">
+                    <div class="card-header">
+                        <strong>Name:</strong>  {{ current_user.name }}
+                    </div>
+                    <h5 class="card-title"> </h5>
+                    <p class="card-text">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8">
+                        <strong>Username:</strong>  {{ current_user.username }} <br>
+                        <strong>User ID:</strong>  {{ current_user.id }} <br>
+                        <strong>Email:</strong>  {{ current_user.email }} <br>
+                        <strong>Role:</strong>  {{ current_user.pet_name }} <br>
+                        <strong>Date Joined:</strong>  {{ current_user.date_added }} <br>
+                        <strong>profile-pic:</strong>  {{ current_user.profile_pic }} <br>
+                    </p>
+                    <a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm">Logout</a>
+                    </div>
+                    <div class="col-4">
+                        {% if current_user.profile_pic %}
+                        <img src="{{ url_for('static', filename='imgs/users/' + current_user.profile_pic ) }}" width="150" height="150" align="right">
+
+
+                        {% else %}
+                        <img src="{{ url_for('static', filename='imgs/profile_picture.png') }}" width="150" height="150" align="right">
+                        {% endif %}
+                    </div>
+                  </div>
+                 </div>
+                </div>
+                <div class="tab-pane fade" id="edit-user">
+                    <form action="/dashboard" method="POST" enctype="multipart/form-data">
+
+                        {{ form.hidden_tag() }}
+                        
+                        {{ form.name.label(class="from_label") }}
+                        {{ form.name(class="form-control form-control-lg", value=name_to_update.name) }}<br>
+            
+                        {{ form.username.label(class="from_label") }}
+                        {{ form.username(class="form-control form-control-lg", value=name_to_update.username) }}<br>
+            
+                        {{ form.email.label(class="from_label") }}
+                        {{ form.email(class="form-control form-control-lg", value=name_to_update.email) }}<br>
+
+                        {{ form.profile_pic.label(class="from_label") }}
+                        {{ form.profile_pic(class="form-control form-control-lg", value=name_to_update.profile_pic) }}<br>
+
+                        <p class="from_label">Insert your password to make changes or <strong>Change password.</strong>
+                        {{ form.password_hash(class="form-control form-control-lg", value=name_to_update.password_hash) }}<br>
+            
+                        {{ form.submit(class="btn btn-primary btn-sm") }}
+                        <a href="{{ url_for('delete_user', id=current_user.id) }}" class="btn btn-danger btn-sm">Delete-User</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
+</html>

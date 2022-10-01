@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  {% extends 'base.html' %}
+  {% block content %}
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="background-color: #acfab0;">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {{ ckeditor.load(custom_url=url_for('static', filename='ckeditor/ckeditor.js')) }}
+  {% if current_user.is_authenticated %}
+ <body>
+
+    <h1>Add blog post</h1>
+    <br><br>
+    <div class="shadow-lg p-3 mb-5 rounded">
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+        
+        <p>{{ form.title.label(class="from_label") }}</p>
+        {{ form.title(class="form-control form-control-lg") }}<br>
+
+
+        {{ form.slug.label(class="from_label") }}
+        {{ form.slug(class="form-select form-control-lg") }}<br>
+
+        {{ form.content(class="form-control form-control-lg", rows="8") }}<br>
+
+        {{ form.submit(class="btn btn-primary mb-3") }}
+
+    </form>
+
+    {{ ckeditor.config(name='content') }}
+
+</div>
+{% else %}
+<h1>Must be logged in!</h1>
+<br><br>
+<a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+
+{% endif %}
+</body>
+
+ {% endblock %}
+</html>
