@@ -9,12 +9,17 @@ you can run on docker container with commands:<br><br>
 
 **1** - For get telegram-bot messages:<br>
         **docker run -it -e ID=</USER_OR_GROUP-ID/> -e TOKEN=</BOT-TOKEN/> -p 5000:5000 yoas1/flask-blog:1.0**<br>
-        OR <br>
-        **docker run -it -e ID=</USER_OR_GROUP-ID/> -e TOKEN=</BOT-TOKEN/> -p 5000:5000 ghcr.io/yoas1/flask-blog:1.0**<br>
+        or <br>
+        **docker run -it -e ID=</USER_OR_GROUP-ID/> -e TOKEN=</BOT-TOKEN/> -p 5000:5000 ghcr.io/yoas1/flask-blog:1.0**<br><br>
 **2** - Without telegram-bot messages:<br>
         **docker run -it -e ID=none -e TOKEN=none -p 5000:5000 yoas1/flask-blog:1.0**<br>
-        OR <br>
+        or <br>
         **docker run -it -e ID=none -e TOKEN=none -p 5000:5000 ghcr.io/yoas1/flask-blog:1.0**<br>
 <br><br>
 
+
+### Admin user:
+**Username:** admin<br>
+**Password:** admin<br><
+(change it on user dashboard)<br><br><br>
 You can show my blog --> [Dev-Docs-Ops](https://yoas1.pythonanywhere.com)
